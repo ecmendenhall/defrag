@@ -1,10 +1,10 @@
-import Network from '../components/Network'
-import Connect from '../components/Connect'
-import Nav from '../components/Nav'
-import Notifications from '../components/Notifications'
+import Network from "../components/Network";
+import Connect from "../components/Connect";
+import Nav from "../components/Nav";
+import Notifications from "../components/Notifications";
 
 interface Props {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
 const FullPage = ({ children }: Props) => {
@@ -14,7 +14,11 @@ const FullPage = ({ children }: Props) => {
       <div className="window mb-4">
         <h1 className="title-bar">
           <span className="title-bar-text">
-            <img src="img/defrag.png" alt="Defrag icon" className="w-6 mr-2 inline" />
+            <img
+              src="img/defrag.png"
+              alt="Defrag icon"
+              className="w-6 mr-2 inline"
+            />
             Defrag
           </span>
         </h1>
@@ -26,7 +30,7 @@ const FullPage = ({ children }: Props) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FullPage
+export default FullPage;

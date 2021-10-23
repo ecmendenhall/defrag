@@ -11,9 +11,7 @@ const About = () => {
               <Contracts />
             </div>
             <div className="mb-2">
-              <h4 className="text-xs font-black">
-                Code
-              </h4>
+              <h4 className="text-xs font-black">Code</h4>
               <ul>
                 <li>
                   <a
@@ -27,12 +25,8 @@ const About = () => {
             </div>
           </div>
           <div className="mb-2">
-            <h4 className="text-xs font-black">
-              How it works
-            </h4>
-            <p>
-              Fill in some information about how this works here.
-            </p>
+            <h4 className="text-xs font-black">How it works</h4>
+            <p>Fill in some information about how this works here.</p>
           </div>
         </div>
       </div>

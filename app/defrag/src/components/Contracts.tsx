@@ -3,29 +3,29 @@ import {
   getExplorerAddressLink,
   useEthers,
   shortenAddress,
-} from '@usedapp/core'
-import { getConfig } from '../config/contracts'
+} from "@usedapp/core";
+import { getConfig } from "../config/contracts";
 
 interface Props {
-  name: string
-  address: string
-  chainId: ChainId
+  name: string;
+  address: string;
+  chainId: ChainId;
 }
 
 const ContractItem = ({ name, address, chainId }: Props) => {
   return (
     <p key={name} className="status-bar-field my-2">
-      {name}:{' '}
+      {name}:{" "}
       <a href={getExplorerAddressLink(address, chainId)}>
         {shortenAddress(address)}
       </a>
     </p>
-  )
-}
+  );
+};
 
 const Contracts = () => {
-  const { chainId } = useEthers()
-  const config = getConfig(chainId)
+  const { chainId } = useEthers();
+  const config = getConfig(chainId);
   return (
     <>
       {chainId && (
@@ -46,7 +46,7 @@ const Contracts = () => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Contracts
+export default Contracts;

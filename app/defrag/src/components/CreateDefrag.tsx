@@ -1,58 +1,63 @@
-import { useEthers } from '@usedapp/core'
-import { useCallback, useState } from 'react'
-import { getConfig } from '../config/contracts'
-import { useDefrag } from '../hooks/contracts'
-import Button from './Button'
+import { useEthers } from "@usedapp/core";
+import { useCallback, useState } from "react";
+import { getConfig } from "../config/contracts";
+import { useCreateDefrag } from "../hooks/contracts";
+import Button from "./Button";
 
 const CreateDefrag = () => {
-  const { chainId } = useEthers()
-  const config = getConfig(chainId)
-  const { state: sendDefragState, send: sendDefrag } = useDefrag()
+  const { chainId } = useEthers();
+  const config = getConfig(chainId);
+  const { state: sendDefragState, send: sendDefrag } = useCreateDefrag();
 
-  const [vaultAddress, setVaultAddress] = useState('')
-  const [minMintAmount, setMinMintAmount] = useState('')
-  const [tokenName, setTokenName] = useState('')
-  const [tokenSymbol, setTokenSymbol] = useState('')
+  const [vaultAddress, setVaultAddress] = useState("");
+  const [minMintAmount, setMinMintAmount] = useState("");
+  const [tokenName, setTokenName] = useState("");
+  const [tokenSymbol, setTokenSymbol] = useState("");
 
   const onVaultAddressChange = (
-    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setVaultAddress(evt.target.value)
-  }
+    setVaultAddress(evt.target.value);
+  };
 
   const onMinMintAmountChange = (
-    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setMinMintAmount(evt.target.value)
-  }
+    setMinMintAmount(evt.target.value);
+  };
 
   const onTokenNameChange = (
-    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setTokenName(evt.target.value)
-  }
+    setTokenName(evt.target.value);
+  };
 
   const onTokenSymbolChange = (
-    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    setTokenSymbol(evt.target.value)
-  }
+    setTokenSymbol(evt.target.value);
+  };
 
   const disableButton = () => {
-    return [vaultAddress, minMintAmount, tokenName, tokenSymbol].includes('')
-  }
+    return [vaultAddress, minMintAmount, tokenName, tokenSymbol].includes("");
+  };
 
   const defrag = useCallback(() => {
     const send = async () => {
-      const res = await sendDefrag(vaultAddress, minMintAmount, tokenName, tokenSymbol);
+      const res = await sendDefrag(
+        vaultAddress,
+        minMintAmount,
+        tokenName,
+        tokenSymbol
+      );
       console.log(res);
-    }
-    send()
-  }, [config])
+    };
+    send();
+  }, [config]);
 
   return (
     <fieldset>
-      <legend>Defragment a vault:</legend>
+      <legend>Create a Defrag from a Fractional vault:</legend>
       <div className="field-row-stacked">
         <label htmlFor="vault-contract">Vault address:</label>
         <input
@@ -82,11 +87,12 @@ const CreateDefrag = () => {
           Defrag
         </Button>
         <div>
-          {sendDefragState.status === "Exception" && sendDefragState.errorMessage}
-       </div>
+          {sendDefragState.status === "Exception" &&
+            sendDefragState.errorMessage}
+        </div>
       </div>
     </fieldset>
-  )
-}
+  );
+};
 
-export default CreateDefrag
+export default CreateDefrag;
