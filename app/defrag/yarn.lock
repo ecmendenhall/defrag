@@ -2,6 +2,11 @@
 # yarn lockfile v1
 
 
+"98.css@^0.1.17":
+  version "0.1.17"
+  resolved "https://registry.yarnpkg.com/98.css/-/98.css-0.1.17.tgz#be9b2fd6dd625d64887f99e5aa0f535546b2a064"
+  integrity sha512-gIKhzysTUaWYRrBEMjJanp4f65JbsZHcIXD3JHWZLwOz0vmmKP6toMnx0uF9RCfnteMBakzAeRDSbsi8Ez3ASQ==
+
 "@babel/code-frame@7.10.4":
   version "7.10.4"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.10.4.tgz#168da1a36e90da68ae8d49c0f1b48c7c6249213a"

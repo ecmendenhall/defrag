@@ -49,6 +49,7 @@
     ]
   },
   "devDependencies": {
+    "98.css": "^0.1.17",
     "autoprefixer": "^9",
     "postcss": "^7",
     "prettier": "^2.4.0",
