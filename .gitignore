@@ -1,0 +1,17 @@
+node_modules
+.env
+
+#Hardhat files
+cache
+artifacts
+typechain
+coverage
+
+coverage.json
+
+#Dapptools artifacts
+bin
+contracts/out/
+out
+
+.vscode
