@@ -4,8 +4,8 @@ interface Props {
   address?: string;
 }
 
-const Defrag = ({ address }: Props) => {
+const DefragMint = ({ address }: Props) => {
   return <div>{address && <MintToken address={address} />}</div>;
 };
 
-export default Defrag;
+export default DefragMint;

@@ -2,7 +2,7 @@ import { useEthers } from "@usedapp/core";
 import { parseEther } from "ethers/lib/utils";
 import { useCallback, useState } from "react";
 import { getConfig } from "../config/contracts";
-import { useApprove, useMintToken } from "../hooks/contracts";
+import { useERC20Approve, useMintToken } from "../hooks/contracts";
 import Button from "./Button";
 
 interface Props {
@@ -16,7 +16,7 @@ const MintTokenForm = ({ defragAddress, vaultAddress }: Props) => {
   const { chainId } = useEthers();
   const config = getConfig(chainId);
   const { state: sendApproveState, send: sendApprove } =
-    useApprove(vaultAddress);
+    useERC20Approve(vaultAddress);
   const { state: sendMintTokenState, send: sendMintToken } =
     useMintToken(defragAddress);
   const [amount, setAmount] = useState<string>("0");
@@ -40,7 +40,7 @@ const MintTokenForm = ({ defragAddress, vaultAddress }: Props) => {
       setActionState("start");
     };
     send();
-  }, [config, amount]);
+  }, [config, amount, defragAddress, sendApprove, sendMintToken]);
 
   const buttonText = () => {
     switch (actionState) {

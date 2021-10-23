@@ -5,7 +5,7 @@ const About = () => {
   return (
     <FullPage>
       <div>
-        <div className="flex flex-col justify-evenly">
+        <div className="flex flex-col justify-evenly p-2">
           <div className="flex flex-col">
             <div>
               <Contracts />
@@ -30,6 +30,8 @@ const About = () => {
               <p>
                 Fractionalizing NFTs is cool, but wouldn't you rather have a fun
                 JPEG in your wallet instead of 30,000 ERC20 tokens?
+              </p>
+              <p>
                 Defragment.art allows Fractional vault curators to create new
                 derivative NFTs mintable by fraction holders.
               </p>

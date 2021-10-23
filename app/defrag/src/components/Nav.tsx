@@ -26,6 +26,7 @@ const Nav = () => {
         <ul className="tree-view">
           <NavItem path="/create" text="Create Defrag" />
           <NavItem path="/mint" text="Mint Token" />
+          <NavItem path="/redeem" text="Redeem Token" />
           <NavItem path="/about" text="About" />
         </ul>
       </div>

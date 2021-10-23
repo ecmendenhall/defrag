@@ -1,4 +1,8 @@
-import { useEthers, getExplorerAddressLink } from "@usedapp/core";
+import {
+  useEthers,
+  getExplorerAddressLink,
+  shortenAddress,
+} from "@usedapp/core";
 import { formatEther } from "@usedapp/core/node_modules/ethers/lib/utils";
 import { useDefrag } from "../hooks/contracts";
 import MintTokenForm from "./MintTokenForm";
@@ -9,36 +13,49 @@ interface Props {
 
 const MintToken = ({ address }: Props) => {
   const { chainId } = useEthers();
-  const { vaultAddress, minMintAmount, parentTokenAddress } =
-    useDefrag(address);
+  const {
+    vaultAddress,
+    vaultName,
+    vaultSymbol,
+    minMintAmount,
+    parentTokenAddress,
+    parentTokenName,
+    parentTokenSymbol,
+  } = useDefrag(address);
 
   return (
     <fieldset>
       <legend>Mint an NFT from fractions</legend>
-      {chainId && vaultAddress && minMintAmount && parentTokenAddress && (
+      {chainId && vaultAddress && (
         <>
           <div>
-            {parentTokenAddress && (
-              <p>
-                <span>Parent token: </span>
-                <a href={getExplorerAddressLink(parentTokenAddress, chainId)}>
-                  {parentTokenAddress}
-                </a>
-              </p>
+            {parentTokenAddress && parentTokenName && parentTokenSymbol && (
+              <div className="mb-2">
+                <div>Parent token: </div>
+                <div>
+                  {parentTokenName} ({parentTokenSymbol}) -{" "}
+                  <a href={getExplorerAddressLink(parentTokenAddress, chainId)}>
+                    {shortenAddress(parentTokenAddress)}
+                  </a>
+                </div>
+              </div>
             )}
-            {vaultAddress && (
-              <p>
-                <span>Fractional vault: </span>
-                <a href={getExplorerAddressLink(vaultAddress, chainId)}>
-                  {vaultAddress}
-                </a>
-              </p>
+            {vaultAddress && vaultName && vaultSymbol && (
+              <div className="mb-2">
+                <div>Fractional vault: </div>
+                <div>
+                  {vaultName} ({vaultSymbol}) -{" "}
+                  <a href={getExplorerAddressLink(vaultAddress, chainId)}>
+                    {shortenAddress(vaultAddress)}
+                  </a>
+                </div>
+              </div>
             )}
             {minMintAmount && (
-              <p>
-                <span>Min mint amount: </span>
-                {formatEther(minMintAmount)} fractions
-              </p>
+              <div className="mb-2">
+                <div>Min mint amount: </div>
+                <div>{formatEther(minMintAmount)} fractions</div>
+              </div>
             )}
           </div>
           <MintTokenForm defragAddress={address} vaultAddress={vaultAddress} />

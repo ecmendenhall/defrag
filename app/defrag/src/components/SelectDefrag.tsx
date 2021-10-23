@@ -1,3 +1,4 @@
+import { shortenAddress } from "@usedapp/core";
 import React, { useState } from "react";
 import { useDefrags } from "../hooks/contracts";
 
@@ -16,8 +17,12 @@ const SelectDefrag = ({ onSelect }: Props) => {
     <fieldset>
       <legend>Select a Defrag</legend>
       <select onChange={onChange}>
-        {defrags.map((address) => {
-          return <option>{address}</option>;
+        {defrags.map((defrag) => {
+          return (
+            <option value={defrag.address}>
+              {defrag.name} - {shortenAddress(defrag.address)}
+            </option>
+          );
         })}
       </select>
     </fieldset>

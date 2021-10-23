@@ -6,10 +6,16 @@ const config = {
     defrag: {
       address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
       abi: new Interface([
+        "function name() returns (string memory)",
+        "function symbol() returns (string memory)",
         "function vault() returns (address)",
         "function minMintAmount() returns (uint256)",
         "function parentToken() returns (address)",
         "function mint(uint256 amount) returns (uint256)",
+        "function redeem(uint256 tokenId) returns (uint256)",
+        "function fractionsFor(uint256 tokenId) returns (uint256)",
+        "function tokenURI(uint256 tokenId) returns (string memory)",
+        "function approve(address to, uint256 tokenId)",
         "event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)",
         "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
       ]),
@@ -24,9 +30,17 @@ const config = {
     },
     fractionalVault: {
       abi: new Interface([
+        "function name() returns (string memory)",
+        "function symbol() returns (string memory)",
         "function approve(address spender, uint256 amount) returns (bool)",
         "event Transfer(address indexed from, address indexed to, uint256 value)",
         "event Approval(address indexed owner, address indexed spender, uint256 value)",
+      ]),
+    },
+    parentToken: {
+      abi: new Interface([
+        "function name() returns (string memory)",
+        "function symbol() returns (string memory)",
       ]),
     },
   },
@@ -34,10 +48,16 @@ const config = {
     defrag: {
       address: "0x6634422E07C8C140449f03314c4F2a506bc0715F",
       abi: new Interface([
+        "function name() returns (string memory)",
+        "function symbol() returns (string memory)",
         "function vault() returns (address)",
         "function minMintAmount() returns (uint256)",
         "function parentToken() returns (address)",
         "function mint(uint256 amount) returns (uint256)",
+        "function redeem(uint256 tokenId) returns (uint256)",
+        "function fractionsFor(uint256 tokenId) returns (uint256)",
+        "function tokenURI(uint256 tokenId) returns (string memory)",
+        "function approve(address to, uint256 tokenId)",
         "event Approval(address indexed owner, address indexed approved, uint256 indexed tokenId)",
         "event Transfer(address indexed from, address indexed to, uint256 indexed tokenId)",
       ]),
@@ -52,9 +72,17 @@ const config = {
     },
     fractionalVault: {
       abi: new Interface([
+        "function name() returns (string memory)",
+        "function symbol() returns (string memory)",
         "function approve(address spender, uint256 amount) returns (bool)",
         "event Transfer(address indexed from, address indexed to, uint256 value)",
         "event Approval(address indexed owner, address indexed spender, uint256 value)",
+      ]),
+    },
+    parentToken: {
+      abi: new Interface([
+        "function name() returns (string memory)",
+        "function symbol() returns (string memory)",
       ]),
     },
   },

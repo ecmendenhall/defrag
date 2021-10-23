@@ -53,7 +53,7 @@ const CreateDefrag = () => {
       console.log(res);
     };
     send();
-  }, [config]);
+  }, [config, minMintAmount, tokenName, tokenSymbol, vaultAddress, sendDefrag]);
 
   return (
     <fieldset>
