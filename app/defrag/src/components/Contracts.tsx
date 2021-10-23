@@ -29,8 +29,8 @@ const Contracts = () => {
   return (
     <>
       {chainId && (
-        <div>
-          <h4 className="text-xs font-black">Contracts</h4>
+        <div className="mb-2">
+          <h4 className="text-xs underline">Contracts</h4>
           <div className="status-bar">
             <ContractItem
               name="Defrag"

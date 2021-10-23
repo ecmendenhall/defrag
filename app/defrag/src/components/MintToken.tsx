@@ -20,7 +20,7 @@ const MintToken = ({ address }: Props) => {
           <div>
             {parentTokenAddress && (
               <p>
-                <span className="font-black">Parent token: </span>
+                <span>Parent token: </span>
                 <a href={getExplorerAddressLink(parentTokenAddress, chainId)}>
                   {parentTokenAddress}
                 </a>
@@ -28,7 +28,7 @@ const MintToken = ({ address }: Props) => {
             )}
             {vaultAddress && (
               <p>
-                <span className="font-black">Fractional vault: </span>
+                <span>Fractional vault: </span>
                 <a href={getExplorerAddressLink(vaultAddress, chainId)}>
                   {vaultAddress}
                 </a>
@@ -36,7 +36,7 @@ const MintToken = ({ address }: Props) => {
             )}
             {minMintAmount && (
               <p>
-                <span className="font-black">Min mint amount: </span>
+                <span>Min mint amount: </span>
                 {formatEther(minMintAmount)} fractions
               </p>
             )}

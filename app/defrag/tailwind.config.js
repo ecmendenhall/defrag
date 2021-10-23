@@ -6,6 +6,10 @@ module.exports = {
   },
   darkMode: false,
   theme: {
+    backgroundColor: (theme) => ({
+      ...theme("colors"),
+      windows: "#3b8589",
+    }),
     extend: {},
   },
   variants: {

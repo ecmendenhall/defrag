@@ -19,7 +19,7 @@ const FullPage = ({ children }: Props) => {
               alt="Defrag icon"
               className="w-6 mr-2 inline"
             />
-            Defrag
+            Defragment.art
           </span>
         </h1>
         <div className="window-body flex flex-col">
