@@ -90,6 +90,16 @@ const RedeemTokenForm = ({ defragAddress }: Props) => {
         <Button disabled={false} onClick={redeem}>
           {buttonText()}
         </Button>
+        <div>{(sendApproveState.status !== 'None') && sendApproveState.status}</div>
+          <div>
+          {sendApproveState.status === "Exception" &&
+            sendApproveState.errorMessage}
+            </div>
+        <div>{(sendRedeemTokenState.status !== 'None') && sendRedeemTokenState.status}</div>
+          <div>
+          {sendRedeemTokenState.status === "Exception" &&
+            sendRedeemTokenState.errorMessage}
+            </div>
       </div>
     </div>
   );

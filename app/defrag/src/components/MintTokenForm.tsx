@@ -64,8 +64,16 @@ const MintTokenForm = ({ defragAddress, vaultAddress }: Props) => {
           {buttonText()}
         </Button>
         <div>
+        <div>{(sendApproveState.status !== 'None') && sendApproveState.status}</div>
+          <div>
+          {sendApproveState.status === "Exception" &&
+            sendApproveState.errorMessage}
+            </div>
+          <div>{(sendMintTokenState.status !== 'None') && sendMintTokenState.status}</div>
+          <div>
           {sendMintTokenState.status === "Exception" &&
             sendMintTokenState.errorMessage}
+            </div>
         </div>
       </div>
     </div>

@@ -100,8 +100,11 @@ const CreateDefrag = () => {
           Defrag
         </Button>
         <div>
+          <div>{(sendDefragState.status !== 'None') && sendDefragState.status}</div>
+        <div>
           {sendDefragState.status === "Exception" &&
             sendDefragState.errorMessage}
+        </div>
         </div>
       </div>
     </fieldset>
