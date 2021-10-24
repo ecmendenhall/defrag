@@ -86,7 +86,7 @@ abstract contract DefragTest is DSTest {
     function setUp() public virtual {
         settings = new Settings();
         vaultFactory = new ERC721VaultFactory(address(settings));
-        nft = new MockERC721("Test NFT", "NFT");
+        nft = new MockERC721("Test NFT", "NFT", "https://api.example.com/metadata");
 
         nft.mint(address(this), 1);
         nft.setApprovalForAll(address(vaultFactory), true);
