@@ -3,7 +3,7 @@ import App from "./App";
 
 test("renders header", () => {
   render(<App />);
-  const header = screen.getByText("Mute Poets");
+  const header = screen.getByText("Defragment.art");
   expect(header).toBeInTheDocument();
 });
 
