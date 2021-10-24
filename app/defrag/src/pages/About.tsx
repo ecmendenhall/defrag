@@ -11,6 +11,29 @@ const About = () => {
               <Contracts />
             </div>
             <div className="mb-2">
+              <h4 className="text-xs underline">Created by</h4>
+              <ul>
+                <li>
+                  <a
+                    className="text-blue-700"
+                    href="https://twitter.com/ecmendenhall"
+                    target="_blank"
+                  >
+                    @ecmendenhall
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="text-blue-700"
+                    href="https://twitter.com/andrewjyao"
+                    target="_blank"
+                  >
+                    @andrewjyao
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div className="mb-2">
               <h4 className="text-xs underline">Code</h4>
               <ul>
                 <li>
