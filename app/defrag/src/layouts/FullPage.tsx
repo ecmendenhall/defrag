@@ -2,12 +2,15 @@ import Network from "../components/Network";
 import Connect from "../components/Connect";
 import Nav from "../components/Nav";
 import Notifications from "../components/Notifications";
+import { ChainId, useEthers } from "@usedapp/core";
 
 interface Props {
   children: React.ReactNode;
 }
 
 const FullPage = ({ children }: Props) => {
+  const { chainId } = useEthers();
+
   return (
     <div className="p-16 min-h-screen">
       <Notifications />
@@ -24,6 +27,7 @@ const FullPage = ({ children }: Props) => {
         </h1>
         <div className="window-body flex flex-col">
           <Connect />
+          <div className="text-center mt-2">{ (chainId !== ChainId.Rinkeby) && "(Switch to Rinkeby to try the demo)"}</div>
           <Nav />
           {children}
           <Network />

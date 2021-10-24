@@ -76,7 +76,7 @@ const CreateDefrag = () => {
         />
       </div>
       <div className="field-row-stacked">
-        <label htmlFor="min-mint-amount">Minimum mint amount:</label>
+        <label htmlFor="min-mint-amount">Minimum mint amount (wei):</label>
         <input
           id="min-mint-amount"
           type="text"

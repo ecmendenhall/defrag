@@ -5,6 +5,10 @@ const config: Config = {
     checkInterval: 500,
     expirationPeriod: 15000,
   },
+  supportedChains: [
+    ChainId.Rinkeby,
+    ChainId.Hardhat
+  ],
   readOnlyChainId: ChainId.Hardhat,
   readOnlyUrls: {
     [ChainId.Hardhat]: "http://localhost:8545",
