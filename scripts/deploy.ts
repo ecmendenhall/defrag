@@ -22,7 +22,11 @@ const setEtherBalance = async (
 
 async function deployMockNFT(ethers: Ethers) {
   const MockERC721Factory = await ethers.getContractFactory("MockERC721");
-  const nft = await MockERC721Factory.deploy("Doge", "DOGE", "https://ipfs.fleek.co/ipfs/bafybeie5df476mgk7bf4uk667jbunr2ebjiv6bi3w6z3pasaoijgvtmybe");
+  const nft = await MockERC721Factory.deploy(
+    "Doge",
+    "DOGE",
+    "https://ipfs.fleek.co/ipfs/bafybeie5df476mgk7bf4uk667jbunr2ebjiv6bi3w6z3pasaoijgvtmybe"
+  );
   await nft.deployed();
 
   console.log("NFT deployed to:", nft.address);

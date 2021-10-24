@@ -14,7 +14,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
     }
 
@@ -23,7 +24,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
     }
 
@@ -32,7 +34,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
         assertEq(defragFactory.defragCount(), 1);
     }
@@ -43,7 +46,8 @@ contract TestDefragFactory is DefragTest {
                 address(vault),
                 MIN_MINT_AMOUNT,
                 "Test Defrag",
-                "DEFRAG"
+                "DEFRAG",
+                ""
             ),
             1
         );
@@ -55,7 +59,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
         assertEq(
             defragFactory.defrags(1),
@@ -68,7 +73,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
         IDefrag created = IDefrag(defragFactory.defrags(1));
 
@@ -80,7 +86,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
         IDefrag created = IDefrag(defragFactory.defrags(1));
 
@@ -92,7 +99,8 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             vault.totalSupply(),
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
     }
 
@@ -101,10 +109,27 @@ contract TestDefragFactory is DefragTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
         IDefrag created = IDefrag(defragFactory.defrags(1));
 
         assertEq(created.minMintAmount(), MIN_MINT_AMOUNT);
+    }
+
+    function test_creates_defrag_with_custom_metadata_URI() public {
+        curator.call_defrag(
+            address(vault),
+            MIN_MINT_AMOUNT,
+            "Test Defrag",
+            "DEFRAG",
+            "https://custom-api.example.com/metadata/"
+        );
+        IDefrag created = IDefrag(defragFactory.defrags(1));
+
+        assertEq(
+            created.metadataBaseURI(),
+            "https://custom-api.example.com/metadata/"
+        );
     }
 }

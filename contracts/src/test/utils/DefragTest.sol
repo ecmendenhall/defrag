@@ -12,9 +12,15 @@ import "../../DefragFactory.sol";
 contract User is ERC721Holder {
     DefragFactory public defragFactory;
     Defrag internal defrag;
+    Defrag internal defragCustomMetadata;
 
-    constructor(address _defrag, address _defragFactory) {
+    constructor(
+        address _defrag,
+        address _defragCustomMetadata,
+        address _defragFactory
+    ) {
         defrag = Defrag(_defrag);
+        defragCustomMetadata = Defrag(_defragCustomMetadata);
         defragFactory = DefragFactory(_defragFactory);
     }
 
@@ -22,13 +28,28 @@ contract User is ERC721Holder {
         address _vault,
         uint256 _minMintAmount,
         string calldata _name,
-        string calldata _symbol
+        string calldata _symbol,
+        string calldata _metadataBaseURI
     ) public returns (uint256) {
-        return defragFactory.defrag(_vault, _minMintAmount, _name, _symbol);
+        return
+            defragFactory.defrag(
+                _vault,
+                _minMintAmount,
+                _name,
+                _symbol,
+                _metadataBaseURI
+            );
     }
 
     function call_mint(uint256 amount) public returns (uint256) {
         return defrag.mint(amount);
+    }
+
+    function call_mint_custom_metadata(uint256 amount)
+        public
+        returns (uint256)
+    {
+        return defragCustomMetadata.mint(amount);
     }
 
     function call_redeem(uint256 tokenId) public returns (uint256) {
@@ -58,9 +79,17 @@ contract Curator {
         address _vault,
         uint256 _minMintAmount,
         string calldata _name,
-        string calldata _symbol
+        string calldata _symbol,
+        string calldata _metadataBaseURI
     ) public returns (uint256) {
-        return defragFactory.defrag(_vault, _minMintAmount, _name, _symbol);
+        return
+            defragFactory.defrag(
+                _vault,
+                _minMintAmount,
+                _name,
+                _symbol,
+                _metadataBaseURI
+            );
     }
 }
 
@@ -74,6 +103,7 @@ abstract contract DefragTest is DSTest {
     TokenVault internal vault;
     DefragFactory internal defragFactory;
     Defrag internal defrag;
+    Defrag internal defragCustomMetadata;
 
     // users
     Curator internal curator;
@@ -86,7 +116,11 @@ abstract contract DefragTest is DSTest {
     function setUp() public virtual {
         settings = new Settings();
         vaultFactory = new ERC721VaultFactory(address(settings));
-        nft = new MockERC721("Test NFT", "NFT", "https://api.example.com/metadata");
+        nft = new MockERC721(
+            "Test NFT",
+            "NFT",
+            "https://api.example.com/metadata"
+        );
 
         nft.mint(address(this), 1);
         nft.setApprovalForAll(address(vaultFactory), true);
@@ -107,10 +141,27 @@ abstract contract DefragTest is DSTest {
             address(vault),
             MIN_MINT_AMOUNT,
             "Test Defrag",
-            "DEFRAG"
+            "DEFRAG",
+            ""
         );
-        user = new User(address(defrag), address(defragFactory));
-        user2 = new User(address(defrag), address(defragFactory));
+        defragCustomMetadata = new Defrag();
+        defragCustomMetadata.initialize(
+            address(vault),
+            MIN_MINT_AMOUNT,
+            "Test Defrag with Custom Metadata",
+            "DEFRAG-METADATA",
+            "https://other-api.example.com/metadata/"
+        );
+        user = new User(
+            address(defrag),
+            address(defragCustomMetadata),
+            address(defragFactory)
+        );
+        user2 = new User(
+            address(defrag),
+            address(defragCustomMetadata),
+            address(defragFactory)
+        );
 
         curator = new Curator(address(vaultFactory), address(defragFactory));
         vault.updateCurator(address(curator));

@@ -7,4 +7,6 @@ interface IDefrag {
     function vault() external returns (IVault);
 
     function minMintAmount() external returns (uint256);
+
+    function metadataBaseURI() external returns (string memory);
 }

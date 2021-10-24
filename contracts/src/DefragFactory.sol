@@ -18,7 +18,8 @@ contract DefragFactory {
         address _vault,
         uint256 _minMintAmount,
         string calldata _name,
-        string calldata _symbol
+        string calldata _symbol,
+        string calldata _metadataBaseURI
     ) public returns (uint256) {
         IVault vault = IVault(_vault);
         require(vault.curator() == address(msg.sender), "!curator");
@@ -27,11 +28,12 @@ contract DefragFactory {
             "minMintAmount>=totalSupply"
         );
         bytes memory _initializeCalldata = abi.encodeWithSignature(
-            "initialize(address,uint256,string,string)",
+            "initialize(address,uint256,string,string,string)",
             _vault,
             _minMintAmount,
             _name,
-            _symbol
+            _symbol,
+            _metadataBaseURI
         );
         address _defrag = address(new Proxy(logic, _initializeCalldata));
         defragCount++;

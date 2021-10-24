@@ -150,7 +150,9 @@ contract TestRedeem is DefragTest {
 }
 
 contract TestTokenURI is DefragTest {
-    function test_delegates_uri_to_vault_token() public {
+    function test_delegates_uri_to_vault_token_when_custom_metadata_absent()
+        public
+    {
         transfer_fractions(MIN_MINT_AMOUNT);
 
         uint256 tokenId = user.call_mint(MIN_MINT_AMOUNT);
@@ -158,7 +160,9 @@ contract TestTokenURI is DefragTest {
         assertEq(defrag.tokenURI(tokenId), nft.tokenURI(1));
     }
 
-    function test_all_tokens_share_parent_metadata() public {
+    function test_all_tokens_share_parent_metadata_when_custom_metadata_absent()
+        public
+    {
         transfer_fractions(3 * MIN_MINT_AMOUNT);
 
         uint256 token1 = user.call_mint(MIN_MINT_AMOUNT);
@@ -168,5 +172,50 @@ contract TestTokenURI is DefragTest {
         assertEq(defrag.tokenURI(token1), nft.tokenURI(1));
         assertEq(defrag.tokenURI(token2), nft.tokenURI(1));
         assertEq(defrag.tokenURI(token3), nft.tokenURI(1));
+    }
+
+    function test_uses_custom_URI_when_custom_metadata_present() public {
+        vault.transfer(address(user), MIN_MINT_AMOUNT);
+        user.call_approve(
+            address(vault),
+            address(defragCustomMetadata),
+            MIN_MINT_AMOUNT
+        );
+
+        uint256 tokenId = user.call_mint_custom_metadata(MIN_MINT_AMOUNT);
+
+        assertEq(
+            defragCustomMetadata.tokenURI(tokenId),
+            "https://other-api.example.com/metadata/1"
+        );
+    }
+
+    function test_all_tokens_have_custom_metadata_when_custom_metadata_present()
+        public
+    {
+        uint256 amount = 3 * MIN_MINT_AMOUNT;
+        vault.transfer(address(user), amount);
+        user.call_approve(
+            address(vault),
+            address(defragCustomMetadata),
+            amount
+        );
+
+        uint256 token1 = user.call_mint_custom_metadata(MIN_MINT_AMOUNT);
+        uint256 token2 = user.call_mint_custom_metadata(MIN_MINT_AMOUNT);
+        uint256 token3 = user.call_mint_custom_metadata(MIN_MINT_AMOUNT);
+
+        assertEq(
+            defragCustomMetadata.tokenURI(token1),
+            "https://other-api.example.com/metadata/1"
+        );
+        assertEq(
+            defragCustomMetadata.tokenURI(token2),
+            "https://other-api.example.com/metadata/2"
+        );
+        assertEq(
+            defragCustomMetadata.tokenURI(token3),
+            "https://other-api.example.com/metadata/3"
+        );
     }
 }

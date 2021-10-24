@@ -9,6 +9,7 @@ contract Defrag is ERC721BurnableUpgradeable {
     IVault public vault;
     IERC721Metadata public parentToken;
     uint256 public minMintAmount;
+    string public metadataBaseURI;
 
     mapping(uint256 => uint256) internal underlyingFractions;
     uint256 internal nextId;
@@ -17,12 +18,14 @@ contract Defrag is ERC721BurnableUpgradeable {
         address _vault,
         uint256 _minMintAmount,
         string memory _name,
-        string memory _symbol
+        string memory _symbol,
+        string memory _metadataBaseURI
     ) external initializer {
         __ERC721_init(_name, _symbol);
         vault = IVault(_vault);
         parentToken = IERC721Metadata(vault.token());
         minMintAmount = _minMintAmount;
+        metadataBaseURI = _metadataBaseURI;
     }
 
     function mint(uint256 amount) public returns (uint256) {
@@ -47,7 +50,20 @@ contract Defrag is ERC721BurnableUpgradeable {
         return underlyingFractions[tokenId];
     }
 
-    function tokenURI(uint256) public view override returns (string memory) {
-        return parentToken.tokenURI(vault.id());
+    function tokenURI(uint256 tokenId)
+        public
+        view
+        override
+        returns (string memory)
+    {
+        if (bytes(metadataBaseURI).length == 0) {
+            return parentToken.tokenURI(vault.id());
+        } else {
+            return super.tokenURI(tokenId);
+        }
+    }
+
+    function _baseURI() internal view override returns (string memory) {
+        return metadataBaseURI;
     }
 }
