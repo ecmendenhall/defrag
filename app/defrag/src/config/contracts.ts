@@ -23,7 +23,7 @@ const config = {
     defragFactory: {
       address: "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512",
       abi: new Interface([
-        "function defrag(address _vault, uint256 _minMintAmount, string calldata _name, string calldata _symbol)",
+        "function defrag(address _vault, uint256 _minMintAmount, string calldata _name, string calldata _symbol, string calldata _metadataBaseURI)",
         "function defragCount() returns (uint256)",
         "function defrags(uint256 id) returns (address)",
       ]),
@@ -67,7 +67,7 @@ const config = {
     defragFactory: {
       address: "0xc5056f3A3b8902607A90B857f571dC783fd143B8",
       abi: new Interface([
-        "function defrag(address _vault, uint256 _minMintAmount, string calldata _name, string calldata _symbol)",
+        "function defrag(address _vault, uint256 _minMintAmount, string calldata _name, string calldata _symbol, string calldata _metadataBaseURI)",
         "function defragCount() returns (uint256)",
         "function defrags(uint256 id) returns (address)",
       ]),

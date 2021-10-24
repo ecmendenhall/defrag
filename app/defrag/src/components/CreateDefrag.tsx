@@ -13,6 +13,8 @@ const CreateDefrag = () => {
   const [minMintAmount, setMinMintAmount] = useState("");
   const [tokenName, setTokenName] = useState("");
   const [tokenSymbol, setTokenSymbol] = useState("");
+  const [metadataURI, setMetadataURI] = useState("");
+
 
   const onVaultAddressChange = (
     evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -38,6 +40,12 @@ const CreateDefrag = () => {
     setTokenSymbol(evt.target.value);
   };
 
+  const onMetadataURIChange = (
+    evt: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setMetadataURI(evt.target.value);
+  };
+
   const disableButton = () => {
     return [vaultAddress, minMintAmount, tokenName, tokenSymbol].includes("");
   };
@@ -48,7 +56,8 @@ const CreateDefrag = () => {
         vaultAddress,
         minMintAmount,
         tokenName,
-        tokenSymbol
+        tokenSymbol,
+        metadataURI
       );
       console.log(res);
     };
@@ -81,6 +90,10 @@ const CreateDefrag = () => {
       <div className="field-row-stacked">
         <label htmlFor="symbol">Token symbol:</label>
         <input id="symbol" type="text" onChange={onTokenSymbolChange} />
+      </div>
+      <div className="field-row-stacked">
+        <label htmlFor="metadata-uri">Metadata URI:</label>
+        <input id="metadata-uri" type="text" onChange={onMetadataURIChange} />
       </div>
       <div className="my-2 flex flex-row justify-between">
         <Button disabled={disableButton()} onClick={defrag}>
