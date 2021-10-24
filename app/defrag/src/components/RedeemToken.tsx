@@ -13,7 +13,7 @@ const RedeemToken = ({ address }: Props) => {
     useDefrag(address);
 
   return (
-    <fieldset>
+    <fieldset className="p-2">
       <legend>Redeem an NFT and get back fractions</legend>
       <RedeemTokenForm defragAddress={address} />
     </fieldset>

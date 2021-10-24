@@ -65,7 +65,7 @@ const CreateDefrag = () => {
   }, [config, minMintAmount, tokenName, tokenSymbol, vaultAddress, sendDefrag]);
 
   return (
-    <fieldset>
+    <fieldset className="p-2">
       <legend>Create a Defrag from a Fractional vault:</legend>
       <div className="field-row-stacked">
         <label htmlFor="vault-contract">Vault address:</label>

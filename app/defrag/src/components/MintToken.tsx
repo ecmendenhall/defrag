@@ -25,7 +25,7 @@ const MintToken = ({ address }: Props) => {
   } = useDefrag(address);
 
   return (
-    <fieldset>
+    <fieldset className="p-2">
       <legend>Mint an NFT from fractions</legend>
       {chainId && vaultAddress && (
         <div>

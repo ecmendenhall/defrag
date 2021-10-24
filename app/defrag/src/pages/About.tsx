@@ -15,6 +15,7 @@ const About = () => {
               <ul>
                 <li>
                   <a
+                    className="text-blue-700"
                     href="https://github.com/ecmendenhall/defrag"
                     target="_blank"
                   >
