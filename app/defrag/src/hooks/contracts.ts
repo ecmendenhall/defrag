@@ -7,6 +7,7 @@ import {
 } from "@usedapp/core";
 import { BigNumber, Contract, ethers } from "@usedapp/core/node_modules/ethers";
 import { useEffect, useState } from "react";
+import { DiagnosticCategory } from "typescript";
 import DefragMint from "../components/DefragMint";
 import { getConfig } from "../config/contracts";
 
@@ -218,9 +219,17 @@ export function useDefrag(address: string) {
 }
 
 const loadTokenMetadata = async (metadataURI: string, id: BigNumber) => {
+  if (metadataURI.startsWith("ipfs://")) {
+    metadataURI = metadataURI.replace("ipfs://", "https://ipfs.io/");
+  }
   try {
     const response = await fetch(metadataURI);
     const data = await response.json();
+    if (data.image) {
+      if (data.image.startsWith("ipfs://")) {
+        data.image = data.image.replace("ipfs://", "https://ipfs.io/");
+      }
+    }
     return { tokenId: id, ...data };
   } catch {
     return { tokenId: id };
