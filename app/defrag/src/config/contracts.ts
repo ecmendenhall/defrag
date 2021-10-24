@@ -32,6 +32,7 @@ const config = {
       abi: new Interface([
         "function name() returns (string memory)",
         "function symbol() returns (string memory)",
+        "function id() returns (uint256)",
         "function approve(address spender, uint256 amount) returns (bool)",
         "event Transfer(address indexed from, address indexed to, uint256 value)",
         "event Approval(address indexed owner, address indexed spender, uint256 value)",
@@ -39,6 +40,7 @@ const config = {
     },
     parentToken: {
       abi: new Interface([
+        "function tokenURI(uint256 tokenId) returns (string memory)",
         "function name() returns (string memory)",
         "function symbol() returns (string memory)",
       ]),
@@ -46,7 +48,7 @@ const config = {
   },
   [ChainId.Rinkeby]: {
     defrag: {
-      address: "0x375F972316CC40619C2B4FF03a2839141974B549",
+      address: "0x7120905B34C83f1939a636E8D6CCAC730C2cf5Af",
       abi: new Interface([
         "function name() returns (string memory)",
         "function symbol() returns (string memory)",
@@ -63,7 +65,7 @@ const config = {
       ]),
     },
     defragFactory: {
-      address: "0xBdac36d657Be0E625aCeC3771cF9d896500Ca3A1",
+      address: "0xc5056f3A3b8902607A90B857f571dC783fd143B8",
       abi: new Interface([
         "function defrag(address _vault, uint256 _minMintAmount, string calldata _name, string calldata _symbol)",
         "function defragCount() returns (uint256)",
@@ -74,6 +76,7 @@ const config = {
       abi: new Interface([
         "function name() returns (string memory)",
         "function symbol() returns (string memory)",
+        "function id() returns (uint256)",
         "function approve(address spender, uint256 amount) returns (bool)",
         "event Transfer(address indexed from, address indexed to, uint256 value)",
         "event Approval(address indexed owner, address indexed spender, uint256 value)",
@@ -81,6 +84,7 @@ const config = {
     },
     parentToken: {
       abi: new Interface([
+        "function tokenURI(uint256 tokenId) returns (string memory)",
         "function name() returns (string memory)",
         "function symbol() returns (string memory)",
       ]),

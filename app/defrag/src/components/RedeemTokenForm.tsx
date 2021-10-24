@@ -31,31 +31,32 @@ const RedeemTokenForm = ({ defragAddress }: Props) => {
   const { state: sendRedeemTokenState, send: sendRedeemToken } =
     useRedeemToken(defragAddress);
   const [actionState, setActionState] = useState<ActionState>("start");
-  const [selectedToken, setSelectedToken] = useState<BigNumber>(
+  const [selectedTokenId, setSelectedTokenId] = useState<BigNumber>(
     parseUnits("0", "wei")
   );
-  const fractions = useFractionsFor(defragAddress, selectedToken);
+  const fractions = useFractionsFor(defragAddress, selectedTokenId);
+  const selectedToken = data?.find((t) => t.tokenId.eq(selectedTokenId));
 
   const onSelect = (tokenId: BigNumber) => {
     console.log("token Id:");
     console.log(tokenId);
     if (tokenId) {
-      setSelectedToken(tokenId);
+      setSelectedTokenId(tokenId);
     }
   };
 
   const redeem = useCallback(() => {
     const send = async () => {
       setActionState("approve");
-      const approveRes = await sendApprove(defragAddress, selectedToken);
+      const approveRes = await sendApprove(defragAddress, selectedTokenId);
       console.log(approveRes);
       setActionState("confirm");
-      const redeemTokenRes = await sendRedeemToken(selectedToken);
+      const redeemTokenRes = await sendRedeemToken(selectedTokenId);
       console.log(redeemTokenRes);
       setActionState("start");
     };
     send();
-  }, [config, selectedToken, defragAddress, sendApprove, sendRedeemToken]);
+  }, [config, selectedTokenId, defragAddress, sendApprove, sendRedeemToken]);
 
   const buttonText = () => {
     switch (actionState) {
@@ -70,11 +71,21 @@ const RedeemTokenForm = ({ defragAddress }: Props) => {
 
   return (
     <div>
-      <div className="my-2 flex flex-row justify-between">
-        <SelectToken tokens={data || []} onSelect={onSelect} />
-        <div>
-          <div>Underlying fractions</div>
-          <div>{formatEther(fractions)}</div>
+      <div className="my-2">
+        <div className="flex flex-row justify-between">
+          <SelectToken tokens={data || []} onSelect={onSelect} />
+          <div>
+            <div>Underlying fractions</div>
+            <div>{formatEther(fractions)}</div>
+          </div>
+          {selectedToken && selectedToken.image && (
+            <div className="w-64 p-2">
+              <img
+                src={selectedToken.image}
+                className="border-dotted border border-black"
+              />
+            </div>
+          )}
         </div>
         <Button disabled={false} onClick={redeem}>
           {buttonText()}

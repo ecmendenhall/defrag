@@ -21,45 +21,58 @@ const MintToken = ({ address }: Props) => {
     parentTokenAddress,
     parentTokenName,
     parentTokenSymbol,
+    parentTokenMetadata,
   } = useDefrag(address);
 
   return (
     <fieldset>
       <legend>Mint an NFT from fractions</legend>
       {chainId && vaultAddress && (
-        <>
-          <div>
-            {parentTokenAddress && parentTokenName && parentTokenSymbol && (
-              <div className="mb-2">
-                <div>Parent token: </div>
-                <div>
-                  {parentTokenName} ({parentTokenSymbol}) -{" "}
-                  <a href={getExplorerAddressLink(parentTokenAddress, chainId)}>
-                    {shortenAddress(parentTokenAddress)}
-                  </a>
+        <div>
+          <div className="flex flex-row justify-between">
+            <div>
+              {parentTokenAddress && parentTokenName && parentTokenSymbol && (
+                <div className="mb-2">
+                  <div>Parent token: </div>
+                  <div>
+                    {parentTokenName} ({parentTokenSymbol}) -{" "}
+                    <a
+                      href={getExplorerAddressLink(parentTokenAddress, chainId)}
+                    >
+                      {shortenAddress(parentTokenAddress)}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            )}
-            {vaultAddress && vaultName && vaultSymbol && (
-              <div className="mb-2">
-                <div>Fractional vault: </div>
-                <div>
-                  {vaultName} ({vaultSymbol}) -{" "}
-                  <a href={getExplorerAddressLink(vaultAddress, chainId)}>
-                    {shortenAddress(vaultAddress)}
-                  </a>
+              )}
+              {vaultAddress && vaultName && vaultSymbol && (
+                <div className="mb-2">
+                  <div>Fractional vault: </div>
+                  <div>
+                    {vaultName} ({vaultSymbol}) -{" "}
+                    <a href={getExplorerAddressLink(vaultAddress, chainId)}>
+                      {shortenAddress(vaultAddress)}
+                    </a>
+                  </div>
                 </div>
-              </div>
-            )}
-            {minMintAmount && (
-              <div className="mb-2">
-                <div>Min mint amount: </div>
-                <div>{formatEther(minMintAmount)} fractions</div>
+              )}
+              {minMintAmount && (
+                <div className="mb-2">
+                  <div>Min mint amount: </div>
+                  <div>{formatEther(minMintAmount)} fractions</div>
+                </div>
+              )}
+            </div>
+            {parentTokenMetadata && (
+              <div className="w-64 p-2">
+                <img
+                  src={parentTokenMetadata.image}
+                  className="border-dotted border border-black"
+                />
               </div>
             )}
           </div>
           <MintTokenForm defragAddress={address} vaultAddress={vaultAddress} />
-        </>
+        </div>
       )}
     </fieldset>
   );

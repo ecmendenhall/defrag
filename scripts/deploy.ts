@@ -22,7 +22,7 @@ const setEtherBalance = async (
 
 async function deployMockNFT(ethers: Ethers) {
   const MockERC721Factory = await ethers.getContractFactory("MockERC721");
-  const nft = await MockERC721Factory.deploy("Fake NFT", "FAKE");
+  const nft = await MockERC721Factory.deploy("Doge", "DOGE");
   await nft.deployed();
 
   console.log("NFT deployed to:", nft.address);
@@ -46,7 +46,7 @@ async function deployCoreContracts(ethers: Ethers) {
 
 export async function deployTestnet(ethers: Ethers) {
   const { nft } = await deployMockNFT(ethers);
-  const { defrag, defragFactory } = await deployCoreContracts(ethers);
+  //const { defrag, defragFactory } = await deployCoreContracts(ethers);
 }
 
 export async function deployLocal(ethers: Ethers, network: Network) {

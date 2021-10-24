@@ -7,6 +7,7 @@ import {
 } from "@usedapp/core";
 import { BigNumber, Contract, ethers } from "@usedapp/core/node_modules/ethers";
 import { useEffect, useState } from "react";
+import DefragMint from "../components/DefragMint";
 import { getConfig } from "../config/contracts";
 
 export interface Token {
@@ -99,6 +100,9 @@ export function useDefrags() {
 export function useDefrag(address: string) {
   const { chainId } = useEthers();
   const config = getConfig(chainId);
+  const [parentTokenMetadata, setParentTokenMetadata] = useState<
+    Token | undefined
+  >();
   const defragsResponse =
     useContractCalls([
       {
@@ -145,6 +149,16 @@ export function useDefrag(address: string) {
       }
     ) ?? [];
 
+  const [parentTokenId] =
+    useContractCall(
+      vaultAddress && {
+        abi: config.fractionalVault.abi,
+        address: vaultAddress,
+        method: "id",
+        args: [],
+      }
+    ) ?? [];
+
   const [parentTokenName] =
     useContractCall(
       parentTokenAddress && {
@@ -165,6 +179,27 @@ export function useDefrag(address: string) {
       }
     ) ?? [];
 
+  const [parentTokenURI] =
+    useContractCall(
+      parentTokenAddress &&
+        parentTokenId && {
+          abi: config.parentToken.abi,
+          address: parentTokenAddress,
+          method: "tokenURI",
+          args: [parentTokenId],
+        }
+    ) ?? [];
+
+  useEffect(() => {
+    const loadData = async () => {
+      if (parentTokenURI) {
+        const metadata = await loadTokenMetadata(parentTokenURI, parentTokenId);
+        setParentTokenMetadata(metadata);
+      }
+    };
+    loadData();
+  }, [parentTokenURI, parentTokenId]);
+
   const huh = {
     vaultAddress,
     vaultName,
@@ -173,6 +208,9 @@ export function useDefrag(address: string) {
     parentTokenAddress,
     parentTokenName,
     parentTokenSymbol,
+    parentTokenId,
+    parentTokenURI,
+    parentTokenMetadata,
   };
   console.log("huh");
   console.log(huh);
@@ -283,7 +321,7 @@ export function useDefragTokensByAccount(
       }
     };
     loadTokenIds();
-  }, [account, library, ...dependencies]);
+  }, [account, library, address, config.defrag.abi, ...dependencies]);
 
   return tokens;
 }
