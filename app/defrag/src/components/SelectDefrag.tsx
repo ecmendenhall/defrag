@@ -14,9 +14,9 @@ const SelectDefrag = ({ onSelect }: Props) => {
   };
 
   return (
-    <fieldset>
+    <fieldset className="p-2">
       <legend>Select a Defrag</legend>
-      <select onChange={onChange}>
+      <select onChange={onChange} className="px-2 w-48 min-w-max">
         {defrags.map((defrag) => {
           return (
             <option value={defrag.address}>

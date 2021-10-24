@@ -25,7 +25,7 @@ const SelectToken = ({ tokens, onSelect }: Props) => {
   return (
     <div>
       <div>Select a token</div>
-      <select onChange={onChange}>
+      <select onChange={onChange} className="px-2 w-12 min-w-max">
         {tokens.map((token) => {
           return <option>{token.tokenId.toNumber()}</option>;
         })}
