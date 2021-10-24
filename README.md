@@ -1,46 +1,28 @@
-# Advanced Sample Hardhat Project
+![OG defrag icon](https://images.app.goo.gl/enbUjmmmcYPLPqmCA) 
 
-This project demonstrates an advanced Hardhat use case, integrating other tools commonly used alongside Hardhat in the ecosystem.
+## About Defragment.art
 
-The project comes with a sample contract, a test for that contract, a sample script that deploys that contract, and an example of a task implementation, which simply lists the available accounts. It also comes with a variety of other tools, preconfigured to work with the project code.
+Fractionalizing NFTs is cool, but wouldn't you rather have a fun JPEG in your wallet instead of 30,000 ERC20 tokens?
 
-Try running some of the following tasks:
+Defragment.art allows Fractional vault curators to create new derivative NFTs mintable by fraction holders.
 
-```shell
-npx hardhat accounts
-npx hardhat compile
-npx hardhat clean
-npx hardhat test
-npx hardhat node
-npx hardhat help
-REPORT_GAS=true npx hardhat test
-npx hardhat coverage
-npx hardhat run scripts/deploy.ts
-TS_NODE_FILES=true npx ts-node scripts/deploy.ts
-npx eslint '**/*.{js,ts}'
-npx eslint '**/*.{js,ts}' --fix
-npx prettier '**/*.{json,sol,md}' --check
-npx prettier '**/*.{json,sol,md}' --write
-npx solhint 'contracts/**/*.sol'
-npx solhint 'contracts/**/*.sol' --fix
-```
+For vault curators:
 
-# Etherscan verification
+    To create a new Defrag token contract, select "Create Defrag" above.
+    Provide a Fractional Vault address and the minimum number of fractions required to mint a derivative NFT.
+    Provide a name and symbol for the derivative token.
+    Click "Defrag" to deploy the derivative NFT contract.
 
-To try out Etherscan verification, you first need to deploy a contract to an Ethereum network that's supported by Etherscan, such as Ropsten.
+For fraction holders:
 
-In this project, copy the .env.example file to a file named .env, and then edit it to fill in the details. Enter your Etherscan API key, your Ropsten node URL (eg from Alchemy), and the private key of the account which will send the deployment transaction. With a valid .env file in place, first deploy your contract:
+    To mint a Defrag token from your fractions, select "Mint" above, and choose a Defrag token.
+    Provide the number of fractions you'd like to use to mint the token.
+    Your fractions will be bundled inside your Defrag token, giving it an underlying value.
+    You can redeem it at any time to get back the bundled fractions.
+    To redeem your Defrag token for the underlying fractions, select "Redeem" above.
 
-```shell
-hardhat run --network ropsten scripts/sample-script.ts
-```
+## Contributing
 
-Then, copy the deployment address and paste it in to replace `DEPLOYED_CONTRACT_ADDRESS` in this command:
+1) Clone the repo 
 
-```shell
-npx hardhat verify --network ropsten DEPLOYED_CONTRACT_ADDRESS "Hello, Hardhat!"
-```
 
-# Performance optimizations
-
-For faster runs of your tests and scripts, consider skipping ts-node's type checking by setting the environment variable `TS_NODE_TRANSPILE_ONLY` to `1` in hardhat's environment. For more details see [the documentation](https://hardhat.org/guides/typescript.html#performance-optimizations).
