@@ -48,7 +48,7 @@ const config = {
   },
   [ChainId.Rinkeby]: {
     defrag: {
-      address: "0x7120905B34C83f1939a636E8D6CCAC730C2cf5Af",
+      address: "0x2904dc676D4Ecc5a93Ba5f18bb3f20f590905C67",
       abi: new Interface([
         "function name() returns (string memory)",
         "function symbol() returns (string memory)",
@@ -65,7 +65,7 @@ const config = {
       ]),
     },
     defragFactory: {
-      address: "0xc5056f3A3b8902607A90B857f571dC783fd143B8",
+      address: "0x0410d9094235f86F89eAAC5f8fc8EC1Ed5961D4f",
       abi: new Interface([
         "function defrag(address _vault, uint256 _minMintAmount, string calldata _name, string calldata _symbol, string calldata _metadataBaseURI)",
         "function defragCount() returns (uint256)",
