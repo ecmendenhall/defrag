@@ -1,4 +1,4 @@
-![OG defrag icon](https://raw.githubusercontent.com/ecmendenhall/defrag/main/defrag_logo.png) 
+<img src="https://raw.githubusercontent.com/ecmendenhall/defrag/main/app/defrag/public/img/defrag.png" alt="Defrag Logo" width=100 />
 
 ## About Defragment.art
 
